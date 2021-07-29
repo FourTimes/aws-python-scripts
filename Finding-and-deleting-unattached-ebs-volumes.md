@@ -1,6 +1,4 @@
 ```py
-
-
 #!/usr/bin/env python
 
 # usage: Finding and deleting unattached EBS volumes
