@@ -1,15 +1,16 @@
 import boto3
 
-sess = boto3.Session(
-  aws_access_key_id="MYAWSACCESSKEYID",
-  aws_secret_access_key="MYSECRETACCESSKEY",
-  region_name="us-east-1",
+login = boto3.Session(
+  aws_access_key_id="xxxxxxxxxxxx",
+  aws_secret_access_key="xxxxxxxxxxxx",
+  region_name="ap-south-1",
 )
 
 
-client = sess.resource('ec2')
-addresses_dict = client.describe_addresses()
+EC2 = login.client('ec2')
+
+addresses_dict = EC2.describe_addresses()
 for eip_dict in addresses_dict['Addresses']:
     if "NetworkInterfaceId" not in eip_dict:
         print(eip_dict['PublicIp'])
-        # client.release_address(AllocationId=eip_dict['AllocationId'])
+        EC2.release_address(AllocationId=eip_dict['AllocationId'])
